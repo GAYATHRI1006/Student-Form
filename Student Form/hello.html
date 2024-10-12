@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title>Student Form</title>
+        <link rel="stylesheet" href="css/style.css">
+        
+    </head>
+    <body>
+        <div class="student">
+        <h1>STUDENT FORM</h1>
+        <table border="5" id="container" class="center">
+            <tr class="rows">
+                <td class="data">Name</td>
+                <td><input type="text" id="Name" class="data" required></td>
+            </tr>
+            <tr class="rows">
+                <td class="data">Age</td>
+                <td><input id="Age" class="data"></td>
+            </tr>
+            <tr class="rows">
+                <td class="data">Gender</td>
+                <td><input type="radio" name="gender" class="Gender"  value="Male">Male <input type="radio" name="gender" value="Female" class="Gender">Female</td>
+            </tr>    
+            <tr >
+                <td class="data" >Course</td>
+                <td id="courses" >
+                    <select name="course" id="Course" class="data" >
+                            <option value="C">C</option>
+                            <option value="C++">C++</option>
+                            <option value="Java">Java</option>
+                            <option value="Javascript">Javascript</option>
+                            <option value="Python">Python</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="rows">
+                <td class="data">E-mail</td>
+                <td><input type="email" id="mail" class="data"></td>
+            </tr>
+            
+            <tr>
+               <td colspan="2" ><button id="btn" type="submit" onclick="saved()" class="data">Save</button></td>
+            </tr>
+        </table><br><br>
+        <table border="5" id="box" class="data">
+            <tr class="rows" class="data">
+                <td class="data">Name</td>
+                <td class="data"> Age</td>
+                <td class="data">Course</td>
+                <td class="data">Gender</td>
+                <td class="data">Email</td>
+                <td class="data">Action</td>
+            </tr>
+        </table>
+        </div>
+    </body>
+</html>
+<script>
+    
+    function saved()
+    {   
+        var content= document.getElementById("box")
+        var usernames=document.getElementById("Name").value
+        var age=document.getElementById("Age").value
+        var gender=document.querySelector('input[name="gender"]:checked')
+        var course=document.getElementById("Course").value
+        var email=document.getElementById("mail").value
+        if (!usernames || !age || !gender || !course || !email) {
+        alert("Please enter all the details");
+        return; // Stop execution if any field is empty
+    }
+        var genderValue = gender ? gender.value : "";
+        var row=content.insertRow()
+        var nick=row.insertCell(0)
+        var num=row.insertCell(1)
+        var sub=row.insertCell(2)
+        var sex=row.insertCell(3)
+        var contact=row.insertCell(4)
+        var del=row.insertCell(5)
+        nick.innerHTML=usernames
+        num.innerHTML=age
+        sub.innerHTML=course
+        sex.innerHTML=genderValue
+        contact.innerHTML=email
+        var deleteButton = document.createElement("button")
+        deleteButton.innerHTML = "Delete"
+        deleteButton.className="Delete-button"
+        deleteButton.onclick = function() {
+            var rowIndex = this.parentNode.parentNode.rowIndex
+            content.deleteRow(rowIndex)
+        }
+        del.appendChild(deleteButton)
+        document.getElementById("Name").value = "";
+        document.getElementById("Age").value = "";
+        document.querySelector('input[name="gender"]:checked').checked = false;
+        document.getElementById("Course").value = "C"; // Set default course
+        document.getElementById("mail").value = "";
+
+    }
+</script>
